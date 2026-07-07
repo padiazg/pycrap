@@ -1,10 +1,12 @@
 from py_crap.complexity.analyzer import Stat
 from py_crap.coverage.parser import FunctionCoverage, ModuleCoverage
-from py_crap.merge.merger import merge, PathIndex
+from py_crap.merge.merger import PathIndex, merge
 
 
 def test_path_index_by_absolute():
-    fc = FunctionCoverage(file="/abs/path/foo.py", package="foo", name="foo_fn", line=1, coverage=80.0)
+    fc = FunctionCoverage(
+        file="/abs/path/foo.py", package="foo", name="foo_fn", line=1, coverage=80.0
+    )
     mc = ModuleCoverage(dir="/abs/path", module_path="foo", functions=[fc])
     idx = PathIndex([mc])
 
@@ -33,7 +35,9 @@ def test_merge_basic():
         ),
     ]
 
-    fc = FunctionCoverage(file="/abs/path/foo.py", package="foo", name="foo_fn", line=1, coverage=80.0)
+    fc = FunctionCoverage(
+        file="/abs/path/foo.py", package="foo", name="foo_fn", line=1, coverage=80.0
+    )
     mc = ModuleCoverage(dir="/abs/path", module_path="foo", functions=[fc])
 
     result = merge([mc], stats)

@@ -10,8 +10,8 @@ from py_crap.report.json_report import JSONFormatter
 from py_crap.report.pr_comment import PRCommentFormatter
 from py_crap.report.sarif import SARIFFormatter
 from py_crap.report.table import TableFormatter
-from py_crap.scan.entries import Entries
-from py_crap.scan.scan import Options, scan as run_scan
+from py_crap.scan.scan import Options
+from py_crap.scan.scan import scan as run_scan
 
 
 @click.command()

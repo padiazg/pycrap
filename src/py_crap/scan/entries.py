@@ -1,10 +1,8 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from py_crap.merge.merger import MergedEntry
 from py_crap.mutation.annotator import annotate
-from py_crap.mutation.mutmut_parser import MutmutReport, parse_mutmut_report
+from py_crap.mutation.mutmut_parser import parse_mutmut_report
 from py_crap.score.crap import CRAPEntry, MissingPolicy, score
 
 

@@ -1,5 +1,5 @@
-import os
 import ast
+import os
 
 from py_crap.complexity.analyzer import Analyzer, complexity
 

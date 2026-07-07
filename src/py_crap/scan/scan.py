@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import re
-from typing import Optional
 
 from py_crap.complexity.analyzer import Analyzer
 from py_crap.coverage.parser import ModuleCoverage
@@ -15,7 +14,7 @@ class Options:
     def __init__(
         self,
         path: str = ".",
-        exclude: Optional[list[str]] = None,
+        exclude: list[str] | None = None,
         missing: str = "pessimistic",
         top: int = 0,
         min_score: float = 0,
@@ -60,7 +59,7 @@ def scan(options: Options) -> Entries:
     return entries
 
 
-def _build_exclude_regex(exclude: list[str]) -> Optional[re.Pattern]:
+def _build_exclude_regex(exclude: list[str]) -> re.Pattern | None:
     if not exclude:
         return None
     return re.compile("|".join(exclude))
@@ -90,7 +89,7 @@ def _apply_top_filter(
     trusted = [e for e in entries if not e.coverage_untrusted]
     untrusted = [e for e in entries if e.coverage_untrusted]
 
-    trusted_sorted = sorted(
+    sorted(
         trusted, key=lambda e: e.effective_score(), reverse=True
     )
 

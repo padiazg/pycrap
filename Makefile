@@ -1,7 +1,7 @@
 PACKAGE := py-crap
 MODULE  := py_crap
 
-.PHONY: build test lint typecheck clean fmt help install
+.PHONY: build test lint typecheck clean fmt help install preflight
 
 build:
 	uv pip install -e ".[dev]"
@@ -21,6 +21,8 @@ clean:
 fmt:
 	ruff format src/ tests/
 
+preflight: lint typecheck test
+
 install: build
 
 help:
@@ -30,4 +32,5 @@ help:
 	@echo "typecheck  - run mypy type checker"
 	@echo "clean      - remove build artifacts"
 	@echo "fmt        - format source code with ruff"
+	@echo "preflight  - run lint, typecheck, and tests"
 	@echo "help       - show this help"

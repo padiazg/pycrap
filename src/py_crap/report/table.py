@@ -52,7 +52,9 @@ class TableFormatter(Formatter):
 
         total = len(sorted_entries)
         if total > 0:
-            console.print(f"{failed}/{total} function(s) exceed threshold CRAP {opts.threshold:.0f}.")
+            console.print(
+                f"{failed}/{total} function(s) exceed threshold CRAP {opts.threshold:.0f}."
+            )
 
         if warning_seen:
             console.print("")

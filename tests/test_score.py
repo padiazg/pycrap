@@ -1,5 +1,5 @@
-from py_crap.score.crap import crap, MissingPolicy
 from py_crap.merge.merger import MergedEntry
+from py_crap.score.crap import MissingPolicy, crap
 
 
 def test_crap_formula():
@@ -17,7 +17,7 @@ def test_crap_formula():
 
 
 def test_missing_pessimistic():
-    from py_crap.score.crap import score, CRAPEntry
+    from py_crap.score.crap import score
 
     entries = [
         MergedEntry(

@@ -34,7 +34,9 @@ class PRCommentFormatter(Formatter):
             writer.write("## No crappy functions\n")
         else:
             writer.write(f"## {len(crappy)} crappy function(s)\n")
-        writer.write(f"\n{len(sorted_entries)} function(s) analyzed &middot; threshold {threshold:.0f}\n\n")
+        writer.write(
+            f"\n{len(sorted_entries)} function(s) analyzed &middot; threshold {threshold:.0f}\n\n"
+        )
 
     @staticmethod
     def _write_crappy_table(writer, crappy, total, base_dir):
@@ -64,7 +66,9 @@ class PRCommentFormatter(Formatter):
 
         writer.write("\n## \u26a0\ufe0f Unreliable Coverage\n\n")
         if detailed:
-            writer.write("| Function | CRAP | Effective CRAP | Mutation Score | Survived Mutants |\n")
+            writer.write(
+                "| Function | CRAP | Effective CRAP | Mutation Score | Survived Mutants |\n"
+            )
             writer.write("|---|---:|---:|---:|---|\n")
             for e in unreliable:
                 mutants_str = _format_mutants_str(e.mutation_details)

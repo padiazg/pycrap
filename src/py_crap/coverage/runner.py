@@ -2,8 +2,6 @@ import os
 import subprocess
 import sys
 import tempfile
-from pathlib import Path
-from typing import Optional
 
 
 class CoverageRunner:
@@ -11,7 +9,7 @@ class CoverageRunner:
         self.target_dir = target_dir
         self.timeout = timeout
 
-    def run(self) -> Optional[str]:
+    def run(self) -> str | None:
         if not os.path.isdir(self.target_dir):
             return None
 

@@ -1,4 +1,4 @@
-from typing import NamedTuple, Optional
+from typing import NamedTuple
 
 from py_crap.complexity.analyzer import Stat
 from py_crap.coverage.parser import FunctionCoverage, ModuleCoverage
@@ -12,7 +12,7 @@ class MergedEntry(NamedTuple):
     complexity: int
     line: int
     end_line: int
-    coverage: Optional[float]
+    coverage: float | None
     coverage_warning: str
 
 
@@ -62,7 +62,7 @@ def merge(
 
     entries: list[MergedEntry] = []
     for stat in stats:
-        cov: Optional[float] = None
+        cov: float | None = None
         cov_warn = ""
 
         fns = idx.lookup(stat.file)

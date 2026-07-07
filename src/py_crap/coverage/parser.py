@@ -1,7 +1,7 @@
 import ast
 import os
 import xml.etree.ElementTree as ET
-from typing import NamedTuple, Optional
+from typing import NamedTuple
 
 
 class FunctionCoverage(NamedTuple):
@@ -16,7 +16,7 @@ class ModuleCoverage(NamedTuple):
     dir: str
     module_path: str
     functions: list[FunctionCoverage]
-    error: Optional[str] = None
+    error: str | None = None
 
 
 def parse_coverage_xml(xml_path: str, mod_dir: str) -> ModuleCoverage:
@@ -41,10 +41,8 @@ def parse_coverage_xml(xml_path: str, mod_dir: str) -> ModuleCoverage:
             continue
 
         pkg = mod_path
-        if source_dir:
-            abs_path = os.path.join(source_dir, filename) if not os.path.isabs(filename) else filename
-        else:
-            abs_path = os.path.join(mod_dir, filename) if not os.path.isabs(filename) else filename
+        base = source_dir if source_dir else mod_dir
+        abs_path = os.path.join(base, filename) if not os.path.isabs(filename) else filename
 
         class_name = cls_elem.get("name", "")
         pkg = f"{pkg}.{class_name}" if pkg and class_name else pkg or class_name
@@ -100,7 +98,7 @@ def _resolve_func_name(file_path: str, line_num: int) -> str:
     return f"<unknown>@{line_num}"
 
 
-def _enclosing_class(node: ast.FunctionDef) -> str:
+def _enclosing_class(node: ast.FunctionDef | ast.AsyncFunctionDef) -> str:
     for parent in ast.walk(node):
         if isinstance(parent, ast.ClassDef):
             for child in parent.body:

@@ -18,7 +18,15 @@ class SARIFFormatter(Formatter):
             uri = _relativize_uri(e.file, opts.base_dir)
 
             if e.coverage_warning:
-                results.append(self._result("go-crap/coverage-unavailable", "warning", e.coverage_warning, uri, e.line))
+                results.append(
+                    self._result(
+                        "go-crap/coverage-unavailable",
+                        "warning",
+                        e.coverage_warning,
+                        uri,
+                        e.line,
+                    )
+                )
 
             if effective_crap > opts.threshold:
                 name = e.func_name
@@ -40,7 +48,9 @@ class SARIFFormatter(Formatter):
                     f"(mutation score: {e.mutation_score * 100:.1f}%)"
                 )
                 msg += self._format_mutant_details(opts.detailed, e.mutation_details)
-                results.append(self._result("go-crap/coverage-untrusted", "warning", msg, uri, e.line))
+                results.append(
+                    self._result("go-crap/coverage-untrusted", "warning", msg, uri, e.line)
+                )
 
         log = {
             "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
@@ -57,7 +67,11 @@ class SARIFFormatter(Formatter):
                                     "id": "crap/high-score",
                                     "shortDescription": {"text": "CRAP score exceeds threshold"},
                                     "fullDescription": {
-                                        "text": "The CRAP score (cyclomatic complexity x coverage) exceeds the threshold, indicating a function that is complex and/or poorly tested."
+                                        "text": (
+                                            "The CRAP score (cyclomatic complexity x coverage) "
+                                            "exceeds the threshold, indicating a function that is "
+                                            "complex and/or poorly tested."
+                                        )
                                     },
                                 }
                             ],

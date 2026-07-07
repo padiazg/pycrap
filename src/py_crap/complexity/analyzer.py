@@ -2,7 +2,7 @@ import ast
 import os
 import re
 from pathlib import Path
-from typing import NamedTuple, Optional
+from typing import NamedTuple
 
 
 class Stat(NamedTuple):
@@ -14,7 +14,7 @@ class Stat(NamedTuple):
     end_line: int
 
 
-def complexity(func_node: ast.FunctionDef) -> int:
+def complexity(func_node: ast.FunctionDef | ast.AsyncFunctionDef) -> int:
     c = 1
     for node in ast.walk(func_node):
         match node:
@@ -53,7 +53,11 @@ def complexity(func_node: ast.FunctionDef) -> int:
     return c
 
 
-SKIP_DIRS = frozenset({".", "_", "__pycache__", ".venv", "venv", ".mypy_cache", ".ruff_cache", ".pytest_cache", "node_modules", "build", "dist", ".egg", ".eggs", "site-packages"})
+SKIP_DIRS = frozenset({
+    ".", "_", "__pycache__", ".venv", "venv", ".mypy_cache",
+    ".ruff_cache", ".pytest_cache", "node_modules", "build",
+    "dist", ".egg", ".eggs", "site-packages",
+})
 
 
 def _is_wildcard_case(case: ast.match_case) -> bool:
@@ -76,7 +80,7 @@ def skip_dir(name: str) -> bool:
 
 
 class Analyzer:
-    def __init__(self, paths: list[str], exclude: Optional[re.Pattern] = None):
+    def __init__(self, paths: list[str], exclude: re.Pattern | None = None):
         self.paths = paths
         self.exclude = exclude
         self.stats: list[Stat] = []
@@ -126,7 +130,10 @@ class Analyzer:
             self._process_func(node, file_path, class_map)
 
     def _process_func(
-        self, node: ast.FunctionDef, file_path: str, class_map: dict[int, str]
+        self,
+        node: ast.FunctionDef | ast.AsyncFunctionDef,
+        file_path: str,
+        class_map: dict[int, str],
     ) -> None:
         if self.exclude and self.exclude.search(node.name):
             return

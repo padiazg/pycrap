@@ -1,7 +1,7 @@
 import io
 
 from py_crap.report.base import FormatOptions
-from py_crap.report.table import TableFormatter, status_symbol, coverage_bar
+from py_crap.report.table import TableFormatter, coverage_bar, status_symbol
 from py_crap.scan.entries import Entries
 from py_crap.score.crap import CRAPEntry, MissingPolicy
 
