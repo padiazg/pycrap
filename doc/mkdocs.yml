@@ -1,0 +1,103 @@
+site_name: py-crap
+site_description: CRAP score calculator for Python projects
+site_url: https://padiazg.github.io/py-crap
+repo_url: https://github.com/padiazg/py-crap
+repo_name: padiazg/py-crap
+edit_uri: edit/master/doc/docs/
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.arithmatex:
+      generic: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - getting-started/installation.md
+    - Quick Start: getting-started/quickstart.md
+  - Concepts:
+    - Overview: concepts/index.md
+    - CRAP Score: concepts/crap-score.md
+    - Missing Coverage Policy: concepts/missing-policy.md
+    - Mutation Testing: concepts/mutation-testing.md
+  - Commands:
+    - commands/scan.md
+  - Integrations:
+    - integrations/index.md
+    - GitHub Actions: integrations/github-actions.md
+    - Gitea: integrations/gitea.md
+    - GitLab CI: integrations/gitlab.md
+    - Azure DevOps: integrations/azure-devops.md
+    - CircleCI: integrations/circleci.md
+    - Jenkins: integrations/jenkins.md
+  - Resources:
+    - resources/index.md
+    - resources/known-issues.md
+  - License: license.md
+  - Changelog: changelog.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/padiazg/py-crap
+  analytics:
+    provider: google
+    property: !ENV ANALYTICS_ID
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
