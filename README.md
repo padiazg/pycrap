@@ -2,6 +2,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![CRAP analysis](https://github.com/padiazg/pycrap/actions/workflows/crap.yml/badge.svg?branch=master)](https://github.com/padiazg/pycrap/actions/workflows/crap.yml)
 
 CRAP score calculator for Python projects. Calculates the CRAP score (cyclomatic complexity × coverage) for every function in a Python project. Inspired by [go-crap](https://github.com/padiazg/go-crap) (Go) and [cargo-crap](https://github.com/Boehs/cargo-crap) (Rust).
 
