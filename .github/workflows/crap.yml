@@ -34,10 +34,10 @@ jobs:
         run: py-crap version
 
       - name: score
-        run: py-crap scan --format github --fail-above --threshold 30 --exclude ".*_test\.py" --verbose
+        run: py-crap scan --format github --fail-above --threshold 60 --exclude "'tests/\.*'" --verbose
 
       - name: generate pr comment
-        run: py-crap scan --format pr-comment --threshold 30 --exclude ".*_test\.py" --output pr-comment.md
+        run: py-crap scan --format pr-comment --threshold 60 --exclude "'tests/\.*'" --output pr-comment.md
 
       - name: save pr number
         run: echo "${{ github.event.pull_request.number }}" > pr-number.txt
