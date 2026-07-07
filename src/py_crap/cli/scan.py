@@ -109,6 +109,7 @@ def scan_cmd(
         top=top,
         min_score=min,
         mutation_report=mutation_report or "",
+        verbose=verbose,
     )
 
     entries = run_scan(options)

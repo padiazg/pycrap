@@ -19,6 +19,7 @@ class Options:
         top: int = 0,
         min_score: float = 0,
         mutation_report: str = "",
+        verbose: bool = False,
     ) -> None:
         self.path = path
         self.exclude = exclude or []
@@ -26,12 +27,13 @@ class Options:
         self.top = top
         self.min_score = min_score
         self.mutation_report = mutation_report
+        self.verbose = verbose
 
 
 def scan(options: Options) -> Entries:
     exclude_re = _build_exclude_regex(options.exclude)
 
-    runner = CoverageRunner(options.path)
+    runner = CoverageRunner(options.path, verbose=options.verbose)
     xml_path = runner.run()
 
     coverages: list[ModuleCoverage] = []
