@@ -28,16 +28,16 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install py-crap
-        run: pip install -e .
+        run: pip install -e ".[dev]"
 
       - name: version
         run: py-crap version
 
       - name: score
-        run: py-crap scan --format github --fail-above --threshold 60 --exclude "'tests/\.*'" --verbose
+        run: py-crap scan --format github --fail-above --threshold 60 --exclude "tests/.*" --verbose
 
       - name: generate pr comment
-        run: py-crap scan --format pr-comment --threshold 60 --exclude "'tests/\.*'" --output pr-comment.md
+        run: py-crap scan --format pr-comment --threshold 60 --exclude "tests/.*" --output pr-comment.md
 
       - name: save pr number
         run: echo "${{ github.event.pull_request.number }}" > pr-number.txt
